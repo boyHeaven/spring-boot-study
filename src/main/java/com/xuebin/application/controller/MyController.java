@@ -1,6 +1,8 @@
 package com.xuebin.application.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,9 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/api")
-public class TestRestController {
+public class MyController {
 
-    @RequestMapping(value = "/test")
+    @Value("${myConfig.configName}")
+    private String configName;
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String testApi() {
 
         return "this is test api";

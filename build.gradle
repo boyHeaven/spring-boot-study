@@ -3,13 +3,16 @@ buildscript {
         springBootVersion = "2.1.3.RELEASE"
     }
     repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
         maven { url "https://maven.aliyun.com/repository/spring-plugin" }
         maven { url "https://maven.aliyun.com/nexus/content/repositories/spring-plugin" }
         mavenCentral()
     }
     dependencies {
         classpath(
+                // SpringBoot的gradle插件
                 "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+                // 依赖管理，不使用版本号自动进行管理
                 "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
         )
     }
@@ -20,9 +23,10 @@ apply {
     plugin("maven")
     plugin("idea")
     plugin("org.springframework.boot")
+    plugin("io.spring.dependency-management")
 }
 
-group 'com.xuebin.'
+group 'com.xuebin'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -30,17 +34,31 @@ targetCompatibility = 1.8
 
 
 repositories {
+    maven { url "https://maven.aliyun.com/repository/central" }
     maven { url "https://maven.aliyun.com/repository/spring-plugin" }
     maven { url "https://maven.aliyun.com/nexus/content/repositories/spring-plugin" }
     mavenCentral()
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter"
+    compile "org.springframework.boot:spring-boot-loader"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-aop"
+    compile "org.springframework.boot:spring-boot-starter-websocket"
+    compile "org.springframework.boot:spring-boot-starter-json"
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-test"
+    compile "org.springframework.kafka:spring-kafka"
+    compile "com.fasterxml.jackson.core:jackson-core"
+    compile "com.fasterxml.jackson.core:jackson-databind"
+    compile "com.fasterxml.jackson.core:jackson-annotations"
+
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }
 
 test {

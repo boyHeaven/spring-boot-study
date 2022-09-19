@@ -1,0 +1,21 @@
+server:
+  pplication:
+    name: spring-boot-study
+  port: 8090
+  kafka:
+    producer:
+      bootstrap-server: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-server: localhost:9092
+      group-id: test-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+myConfig:
+  configName: xuebin
+
+kafkaTopicConfig:
+  groupId: test-consumer-group
+  defaultTopicName: test-topic1
